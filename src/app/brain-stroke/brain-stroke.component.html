@@ -1,0 +1,182 @@
+<div class="brain-app">
+  <!-- Section principale de prédiction -->
+  <div class="prediction-container">
+    <div class="prediction-header">
+      <h2><span class="emoji">🧠</span> Prédiction AVC (Brain Stroke)</h2>
+      <p class="subtitle">Analyse d'images médicales par intelligence artificielle</p>
+    </div>
+
+    <!-- Zone de dépôt améliorée -->
+    <div class="drop-zone" 
+         (click)="fileInput.click()"
+         (drop)="onDrop($event)"
+         (dragover)="onDragOver($event)"
+         [class.active]="isDragOver">
+      <div class="drop-content">
+        <i class="upload-icon">📁</i>
+        <p>Glissez-déposez votre image IRM ou <span>parcourir</span></p>
+        <p class="file-types">Formats supportés: .jpg, .png, .dcm</p>
+      </div>
+      <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*,.dcm" hidden>
+    </div>
+    <label for="phone">Numéro de téléphone du patient : </label>
+    <input id="phone" type="text" [(ngModel)]="patientPhoneNumber" placeholder="+216...">
+    <!-- Bouton d'analyse avec état de chargement -->
+    <button class="analyze-btn" (click)="submitImage()" [disabled]="!selectedFile || isLoading">
+      <span *ngIf="!isLoading">Analyser l'image</span>
+      <span *ngIf="isLoading" class="spinner">
+        <span class="spinner-dot">.</span>
+        <span class="spinner-dot">.</span>
+        <span class="spinner-dot">.</span>
+      </span>
+    </button>
+
+    <!-- Prévisualisation améliorée -->
+    <div *ngIf="imagePreview" class="preview-container">
+      <div class="preview-header">
+        <h3>Image sélectionnée :</h3>
+        <button class="clear-btn" (click)="clearSelection()">×</button>
+      </div>
+      <div class="image-wrapper">
+        <img [src]="imagePreview" alt="Image sélectionnée" class="preview-img">
+        <div *ngIf="isLoading" class="loading-overlay">
+          <div class="loading-spinner"></div>
+          <p>Analyse en cours...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Résultats avec visualisation améliorée -->
+    <div *ngIf="prediction" class="result-container" [class.high-risk]="isHighRisk">
+      <div class="result-header">
+        <h3>Résultat de l'analyse :</h3>
+        <span class="risk-indicator">{{ isHighRisk ? '⚠️ Risque Élevé' : '✅ Risque Faible' }}</span>
+      </div>
+      <div class="result-content">
+        <div class="confidence-meter">
+          <div class="meter-bar" [style.width.%]="confidence * 100"></div>
+          <span class="confidence-value">{{ (confidence * 100).toFixed(1) }}% de confiance</span>
+        </div>
+        <p class="prediction-text">{{ prediction }}</p>
+        
+        <div *ngIf="isHighRisk" class="emergency-actions">
+          <button class="emergency-btn">
+            <i class="emergency-icon">🚨</i> Contacter un spécialiste
+          </button>
+          <button class="info-btn">
+            <i class="info-icon">ℹ️</i> Que faire en cas d'urgence?
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section article améliorée -->
+  <div class="article-container">
+    <article class="stroke-article">
+      <header class="article-header">
+        <h2><span class="emoji">🧬</span> Comprendre l'AVC et la Prédiction par IA</h2>
+        <p class="article-subtitle">Informations médicales et prévention</p>
+      </header>
+
+      <div class="article-content">
+        <p>
+          L'accident vasculaire cérébral (AVC) est une urgence médicale qui se produit lorsque l'irrigation sanguine du cerveau est interrompue. Grâce à l'intelligence artificielle et l'analyse d'images médicales, il est désormais possible d'estimer le risque d'AVC avec une précision de plus de 92%.
+        </p>
+
+        <div class="image-comparison">
+          <div class="image-wrapper">
+            <img src="assets/avc.jpg" alt="Exemple de scan cérébral" class="article-img">
+            <div class="image-caption">Scan cérébral montrant une lésion vasculaire</div>
+          </div>
+          <div class="image-legend">
+            <div class="legend-item">
+              <span class="legend-color risk-color"></span>
+              <span>Zone à risque</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color normal-color"></span>
+              <span>Tissu sain</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-facts">
+          <h3><span class="emoji">🤖</span> Comment l'IA détecte-t-elle les risques?</h3>
+          <p>Notre modèle analyse plus de 50 paramètres visuels incluant:</p>
+          <div class="features-grid">
+            <div class="feature-item">
+              <span class="feature-icon">🩸</span>
+              <span>Signes d'hémorragie</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🧫</span>
+              <span>Anomalies tissulaires</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">📏</span>
+              <span>Asymétries vasculaires</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🔍</span>
+              <span>Micro-lésions</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="recommendations">
+          <h3><span class="emoji">✅</span> Recommandations pour prévenir l'AVC :</h3>
+          <div class="recommendations-grid">
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #ff6b6b;">🫀</div>
+              <h4>Pression artérielle</h4>
+              <p>Maintenez une pression artérielle normale (<140/90 mmHg)</p>
+            </div>
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #48dbfb;">🚭</div>
+              <h4>Habitudes saines</h4>
+              <p>Évitez le tabac et limitez l'alcool à 1 verre/jour</p>
+            </div>
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #1dd1a1;">🥗</div>
+              <h4>Alimentation</h4>
+              <p>Privilégiez fruits, légumes et céréales complètes</p>
+            </div>
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #f368e0;">🏃‍♂️</div>
+              <h4>Activité physique</h4>
+              <p>30 minutes d'exercice modéré 5 fois/semaine</p>
+            </div>
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #ff9f43;">🧘‍♀️</div>
+              <h4>Gestion du stress</h4>
+              <p>Techniques de relaxation et sommeil de qualité</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="emergency-info">
+          <h3><span class="emoji">⚠️</span> Signes d'alerte d'un AVC (FAST):</h3>
+          <div class="fast-grid">
+            <div class="fast-item">
+              <div class="fast-letter">F</div>
+              <p>Face (visage paralysé)</p>
+            </div>
+            <div class="fast-item">
+              <div class="fast-letter">A</div>
+              <p>Arms (bras faible)</p>
+            </div>
+            <div class="fast-item">
+              <div class="fast-letter">S</div>
+              <p>Speech (trouble de la parole)</p>
+            </div>
+            <div class="fast-item">
+              <div class="fast-letter">T</div>
+              <p>Time (appelez le 15 immédiatement)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

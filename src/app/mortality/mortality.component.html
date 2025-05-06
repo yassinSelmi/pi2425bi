@@ -1,0 +1,162 @@
+<div class="container">
+  <h2>💀 Mortality Prediction</h2>
+
+  <!-- Form with ngForm binding -->
+  <form (ngSubmit)="submitForm()" #mortalityForm="ngForm" class="form-container">
+    
+    <!-- Apache 4A ICU Death Probability -->
+    <div class="form-group">
+      <label>Apache 4A ICU Death Probability</label>
+      <input type="number" step="any" required min="0" max="1" 
+             [(ngModel)]="formData.apache_4a_icu_death_prob" name="icuProb"
+             #icuProb="ngModel">
+      <div *ngIf="icuProb.invalid && (icuProb.dirty || icuProb.touched)" class="error-message">
+        <div *ngIf="icuProb.errors?.['required']">This field is required</div>
+        <div *ngIf="icuProb.errors?.['min'] || icuProb.errors?.['max']">
+          Probability must be between 0 and 1
+        </div>
+      </div>
+    </div>
+
+    <!-- Apache 4A Hospital Death Probability -->
+    <div class="form-group">
+      <label>Apache 4A Hospital Death Probability</label>
+      <input type="number" step="any" required min="0" max="1" 
+             [(ngModel)]="formData.apache_4a_hospital_death_prob" name="hospitalProb"
+             #hospitalProb="ngModel">
+      <div *ngIf="hospitalProb.invalid && (hospitalProb.dirty || hospitalProb.touched)" class="error-message">
+        <div *ngIf="hospitalProb.errors?.['required']">This field is required</div>
+        <div *ngIf="hospitalProb.errors?.['min'] || hospitalProb.errors?.['max']">
+          Probability must be between 0 and 1
+        </div>
+      </div>
+    </div>
+
+    <!-- Ventilated Apache -->
+    <div class="form-group">
+      <label>Ventilated Apache</label>
+      <input type="number" required min="0" max="1"
+             [(ngModel)]="formData.ventilated_apache" name="ventilatedApache"
+             #ventilatedApache="ngModel">
+      <div *ngIf="ventilatedApache.invalid && (ventilatedApache.dirty || ventilatedApache.touched)" class="error-message">
+        <div *ngIf="ventilatedApache.errors?.['required']">This field is required</div>
+        <div *ngIf="ventilatedApache.errors?.['min'] || ventilatedApache.errors?.['max']">
+          Value must be 0 or 1
+        </div>
+      </div>
+    </div>
+
+    <!-- D1 SpO2 Min -->
+    <div class="form-group">
+      <label>D1 SpO2 Min</label>
+      <input type="number" required min="0" max="100"
+             [(ngModel)]="formData.d1_spo2_min" name="spo2Min"
+             #spo2Min="ngModel">
+      <div *ngIf="spo2Min.invalid && (spo2Min.dirty || spo2Min.touched)" class="error-message">
+        <div *ngIf="spo2Min.errors?.['required']">This field is required</div>
+        <div *ngIf="spo2Min.errors?.['min'] || spo2Min.errors?.['max']">
+          SpO2 must be between 0 and 100
+        </div>
+      </div>
+    </div>
+
+    <!-- GCS Eyes Apache -->
+    <div class="form-group">
+      <label>GCS Eyes Apache</label>
+      <input type="number" required min="1" max="4"
+             [(ngModel)]="formData.gcs_eyes_apache" name="gcsEyesApache"
+             #gcsEyesApache="ngModel">
+      <div *ngIf="gcsEyesApache.invalid && (gcsEyesApache.dirty || gcsEyesApache.touched)" class="error-message">
+        <div *ngIf="gcsEyesApache.errors?.['required']">This field is required</div>
+        <div *ngIf="gcsEyesApache.errors?.['min'] || gcsEyesApache.errors?.['max']">
+          GCS Eyes must be between 1 and 4
+        </div>
+      </div>
+    </div>
+
+    <!-- D1 SysBP Noninvasive Min -->
+    <div class="form-group">
+      <label>D1 SysBP Noninvasive Min</label>
+      <input type="number" required min="0" max="300"
+             [(ngModel)]="formData.d1_sysbp_noninvasive_min" name="sysbpNoninvasiveMin"
+             #sysbpNoninvasiveMin="ngModel">
+      <div *ngIf="sysbpNoninvasiveMin.invalid && (sysbpNoninvasiveMin.dirty || sysbpNoninvasiveMin.touched)" class="error-message">
+        <div *ngIf="sysbpNoninvasiveMin.errors?.['required']">This field is required</div>
+        <div *ngIf="sysbpNoninvasiveMin.errors?.['min'] || sysbpNoninvasiveMin.errors?.['max']">
+          Systolic BP must be between 0 and 300 mmHg
+        </div>
+      </div>
+    </div>
+
+    <!-- D1 SysBP Min -->
+    <div class="form-group">
+      <label>D1 SysBP Min</label>
+      <input type="number" required min="0" max="300"
+             [(ngModel)]="formData.d1_sysbp_min" name="sysbpMin"
+             #sysbpMin="ngModel">
+      <div *ngIf="sysbpMin.invalid && (sysbpMin.dirty || sysbpMin.touched)" class="error-message">
+        <div *ngIf="sysbpMin.errors?.['required']">This field is required</div>
+        <div *ngIf="sysbpMin.errors?.['min'] || sysbpMin.errors?.['max']">
+          Systolic BP must be between 0 and 300 mmHg
+        </div>
+      </div>
+    </div>
+
+    <!-- D1 Heart Rate Min -->
+    <div class="form-group">
+      <label>D1 Heart Rate Min</label>
+      <input type="number" required min="0" max="300"
+             [(ngModel)]="formData.d1_heartrate_min" name="heartrateMin"
+             #heartrateMin="ngModel">
+      <div *ngIf="heartrateMin.invalid && (heartrateMin.dirty || heartrateMin.touched)" class="error-message">
+        <div *ngIf="heartrateMin.errors?.['required']">This field is required</div>
+        <div *ngIf="heartrateMin.errors?.['min'] || heartrateMin.errors?.['max']">
+          Heart rate must be between 0 and 300 bpm
+        </div>
+      </div>
+    </div>
+
+    <!-- D1 DiasBP Min -->
+    <div class="form-group">
+      <label>D1 DiasBP Min</label>
+      <input type="number" required min="0" max="200"
+             [(ngModel)]="formData.d1_diasbp_min" name="diasbpMin"
+             #diasbpMin="ngModel">
+      <div *ngIf="diasbpMin.invalid && (diasbpMin.dirty || diasbpMin.touched)" class="error-message">
+        <div *ngIf="diasbpMin.errors?.['required']">This field is required</div>
+        <div *ngIf="diasbpMin.errors?.['min'] || diasbpMin.errors?.['max']">
+          Diastolic BP must be between 0 and 200 mmHg
+        </div>
+      </div>
+    </div>
+
+    <!-- Solid Tumor With Metastasis -->
+    <div class="form-group">
+      <label>Solid Tumor With Metastasis</label>
+      <input type="number" required min="0" max="1"
+             [(ngModel)]="formData.solid_tumor_with_metastasis" name="tumorMetastasis"
+             #tumorMetastasis="ngModel">
+      <div *ngIf="tumorMetastasis.invalid && (tumorMetastasis.dirty || tumorMetastasis.touched)" class="error-message">
+        <div *ngIf="tumorMetastasis.errors?.['required']">This field is required</div>
+        <div *ngIf="tumorMetastasis.errors?.['min'] || tumorMetastasis.errors?.['max']">
+          Value must be 0 or 1
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!mortalityForm.form.valid">Predict</button>
+
+    <!-- Prediction Result -->
+    <div *ngIf="predictionResult" class="result" style="margin-top: 20px; padding: 15px; background-color: #e8f5e9; border-left: 5px solid #4caf50; border-radius: 5px;">
+      <h3 style="color: #2e7d32;">🧾 Prediction result</h3>
+      <p><strong>Probability of survival :</strong> {{ predictionResult.probability }}</p>
+      <p><strong>Result :</strong> {{ predictionResult.class }}</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error" style="margin-top: 20px; padding: 15px; background-color: #ffebee; border-left: 5px solid #d32f2f; border-radius: 5px;">
+      <h3 style="color: #c62828;">❌ Error</h3>
+      <p>{{ errorMessage }}</p>
+    </div>
+  </form>
+</div>

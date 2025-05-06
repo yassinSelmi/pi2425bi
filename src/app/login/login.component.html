@@ -1,0 +1,75 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <div class="left-panel">
+      <div class="app-logo">
+        <img src="assets/logo.png" alt="Medical App Logo">
+      </div>
+      <h1>Bienvenue sur HealthCare</h1>
+      <p>Plateforme médicale intelligente pour professionnels de santé</p>
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-chart-line"></i>
+          <span>Analytics en temps réel</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-robot"></i>
+          <span>Assistant IA médical</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-shield-alt"></i>
+          <span>Sécurité des données</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="right-panel">
+      <div class="login-card">
+        <h2>Connexion</h2>
+        
+        <!-- Message d'erreur -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+        </div>
+        
+        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+          <div class="form-group">
+            <label for="username">
+              <i class="fas fa-user"></i>
+            </label>
+            <input type="text" id="username" [(ngModel)]="username" name="username" 
+                   required placeholder="Nom d'utilisateur" autocomplete="username">
+          </div>
+          
+          <div class="form-group">
+            <label for="password">
+              <i class="fas fa-lock"></i>
+            </label>
+            <input [type]="showPassword ? 'text' : 'password'" id="password" [(ngModel)]="password" name="password" 
+                   required placeholder="Mot de passe" autocomplete="current-password">
+            <i class="fas fa-eye toggle-password" (click)="togglePasswordVisibility()"></i>
+          </div>
+
+          <button type="submit" [disabled]="!loginForm.valid" class="login-btn">
+            <span *ngIf="!isLoading">Se connecter</span>
+            <div *ngIf="isLoading" class="spinner"></div>
+          </button>
+          
+          <div class="forgot-password" (click)="showForgotPassword()">
+            Mot de passe oublié ?
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Mot de passe oublié -->
+  <div class="modal" *ngIf="showForgotPasswordModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeForgotPassword()">&times;</span>
+      <h3>Réinitialisation du mot de passe</h3>
+      <p>Entrez votre email pour recevoir un lien de réinitialisation</p>
+      <input type="email" placeholder="Votre email professionnel" [(ngModel)]="resetEmail">
+      <button (click)="sendResetLink()">Envoyer le lien</button>
+    </div>
+  </div>
+</div>

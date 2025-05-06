@@ -1,0 +1,178 @@
+/* General Container */
+.wiki-search-container {
+  background: #f9f9f9;
+  padding: 30px;
+  max-width: 900px;
+  margin: 30px auto;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.wiki-search-container h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+}
+
+.wiki-search-container h1 i {
+  color: #FF6347; /* Tomato color for the icon */
+  margin-right: 10px;
+}
+
+/* Search Controls */
+.search-controls {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.search-box {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  font-size: 1.1em;
+  outline: none;
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+
+.search-box input:focus {
+  border-color: #FF6347;
+  box-shadow: 0 0 5px rgba(255, 99, 71, 0.6);
+}
+
+.search-box button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: #FF6347;
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.search-box button:hover {
+  background-color: #e0533d;
+}
+
+.search-box button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.search-box button i {
+  margin-right: 10px;
+}
+
+/* Recent Searches */
+.recent-searches {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.recent-searches h3 {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.recent-searches ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recent-searches ul li {
+  margin-bottom: 8px;
+}
+
+.recent-searches ul li a {
+  color: #FF6347;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+.recent-searches ul li a:hover {
+  color: #e0533d;
+}
+
+/* Error Message */
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.error-message i {
+  margin-right: 10px;
+}
+
+/* Search Results */
+.search-results {
+  margin-top: 30px;
+}
+
+.result-header {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+  font-weight: bold;
+}
+
+.meta-info {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.article-content {
+  margin-top: 20px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.read-more a {
+  color: #FF6347;
+  text-decoration: none;
+  font-size: 1.1em;
+  margin-top: 15px;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.read-more a:hover {
+  color: #e0533d;
+}
+
+.no-results {
+  font-size: 1.1em;
+  color: #555;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

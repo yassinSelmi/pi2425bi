@@ -1,0 +1,91 @@
+<!-- src/app/components/deepmedicament/deepmedicament.component.html -->
+<div class="deepmed-container">
+    <div class="header">
+      <h2>
+        <i class="fas fa-brain medical-icon"></i>
+        DeepMedicament - Diagnostic Assistance
+      </h2>
+      <p class="subtitle">AI-powered medical specialty prediction system</p>
+    </div>
+  
+    <div class="card">
+      <form (ngSubmit)="onSubmit()" #predictionForm="ngForm">
+        <div class="form-section">
+          <div class="form-group">
+            <label for="sampleName">
+              <i class="fas fa-tag"></i>
+              Case Identifier
+            </label>
+            <input type="text" id="sampleName" [(ngModel)]="sampleName" name="sampleName" 
+                   required placeholder="e.g. Patient-1234">
+          </div>
+  
+          <div class="form-group">
+            <label for="description">
+              <i class="fas fa-file-medical"></i>
+              Clinical Notes
+            </label>
+            <textarea id="description" [(ngModel)]="description" name="description" 
+                      rows="8" required placeholder="Enter patient symptoms, history, and clinical findings..."></textarea>
+          </div>
+        </div>
+  
+        <div class="action-buttons">
+          <button type="submit" [disabled]="isLoading || !predictionForm.form.valid" 
+                  class="predict-btn">
+            <i class="fas" [ngClass]="{'fa-search': !isLoading, 'fa-spinner fa-pulse': isLoading}"></i>
+            {{ isLoading ? 'Analyzing...' : 'Predict Specialty' }}
+          </button>
+          
+          <button type="button" (click)="sampleName = ''; description = ''; prediction = ''" 
+                  class="clear-btn">
+            <i class="fas fa-eraser"></i>
+            Clear
+          </button>
+        </div>
+      </form>
+  
+      <div *ngIf="prediction" class="result-section">
+        <div class="result-card">
+          <h3>
+            <i class="fas fa-diagnoses"></i>
+            AI Prediction Result
+          </h3>
+          
+          <div class="result-content">
+            <div class="specialty-badge">
+              <span class="badge-label">Most Likely Specialty:</span>
+              <span class="badge-value">{{ prediction }}</span>
+            </div>
+            
+            <div class="confidence-meter">
+              <div class="meter-label">Confidence Level:</div>
+              <div class="meter-bar">
+                <div class="meter-fill" [style.width.%]="85"></div> <!-- Adjust percentage as needed -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="disclaimer">
+            <i class="fas fa-exclamation-triangle"></i>
+            Note: This AI suggestion should support but not replace clinical judgment.
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="info-footer">
+      <div class="info-tile">
+        <i class="fas fa-database"></i>
+        <span>Powered by BERT Medical</span>
+      </div>
+      <div class="info-tile">
+        <i class="fas fa-shield-alt"></i>
+        <span>HIPAA Compliant</span>
+      </div>
+      <div class="info-tile">
+        <i class="fas fa-clock"></i>
+        <span>Real-time Analysis</span>
+      </div>
+    </div>
+  </div>

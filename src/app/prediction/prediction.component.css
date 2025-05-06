@@ -1,0 +1,463 @@
+/* Modern color palette */
+:root {
+  --primary: #4a6fa5;
+  --primary-dark: #3a5a8a;
+  --secondary: #ff7e5f;
+  --secondary-dark: #e06a4e;
+  --success: #4caf50;
+  --danger: #f44336;
+  --warning: #ff9800;
+  --info: #2196f3;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --gray: #6c757d;
+  --light-gray: #e9ecef;
+  --white: #ffffff;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--dark);
+  background-color: #f5f7fa;
+}
+
+/* Container for the entire prediction form */
+.prediction-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Header styling */
+.prediction-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.heart-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(255, 126, 95, 0.3);
+}
+
+.heart-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--white);
+}
+
+.prediction-header h2 {
+  font-size: 2.2rem;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--gray);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form card styling */
+.form-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.form-card:hover {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Form grid layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Form group styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+.required-indicator {
+  color: var(--danger);
+  margin-left: 0.25rem;
+  font-size: 1.2rem;
+}
+
+/* Input and select styling */
+.input-wrapper, .select-wrapper {
+  position: relative;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  color: var(--dark);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+}
+
+input::placeholder {
+  color: var(--gray);
+  opacity: 0.6;
+}
+
+/* Custom select arrow */
+.select-wrapper {
+  position: relative;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.select-arrow svg {
+  width: 1rem;
+  height: 1rem;
+  fill: var(--gray);
+}
+
+/* Button styling */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--light);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  margin-right: 0.5rem;
+  display: flex;
+}
+
+.btn-icon svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+/* Loading state */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading-spinner {
+  margin-bottom: 1.5rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(74, 111, 165, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.loading-subtext {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* Result card styling */
+.result-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.high-risk-card {
+  border-left: 5px solid var(--danger);
+}
+
+.low-risk-card {
+  border-left: 5px solid var(--success);
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.result-header h3 {
+  font-size: 1.5rem;
+  color: var(--dark);
+}
+
+.risk-level {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.high-risk {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var(--danger);
+}
+
+.low-risk {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--success);
+}
+
+.result-body {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.result-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.high-risk-card .result-icon {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.high-risk-card .result-icon svg {
+  fill: var(--danger);
+  width: 30px;
+  height: 30px;
+}
+
+.low-risk-card .result-icon {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.low-risk-card .result-icon svg {
+  fill: var(--success);
+  width: 30px;
+  height: 30px;
+}
+
+.result-content {
+  flex-grow: 1;
+}
+
+.result-content p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.recommendations h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: var(--dark);
+}
+
+.recommendations ul {
+  list-style-position: inside;
+  margin-left: 0;
+}
+
+.recommendations li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--dark);
+}
+
+/* Error card styling */
+.error-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  border-left: 5px solid var(--danger);
+  animation: fadeIn 0.5s ease-out;
+  text-align: center;
+}
+
+.error-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  background-color: rgba(244, 67, 54, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--danger);
+}
+
+.error-content h3 {
+  font-size: 1.5rem;
+  color: var(--danger);
+  margin-bottom: 0.5rem;
+}
+
+.error-content p {
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .result-body {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .prediction-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .form-card, .result-card, .error-card {
+    padding: 1.5rem;
+  }
+}
+
+.form-card,.result-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,59 @@
+<!-- app.component.html -->
+<nav *ngIf="!isHomeOrLogin()" class="navbar">
+  <div class="navbar-brand">
+    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <span class="app-name">HealthCare</span>
+  </div>
+
+  <div class="nav-links">
+    <!-- Boutons pour l'admin -->
+    <ng-container *ngIf="authService.isAdmin()">
+      <a routerLink="/report" class="nav-link" routerLinkActive="active">
+        <i class="fas fa-chart-line"></i>
+        <span>PowerBi</span>
+      </a>
+      <a routerLink="/chatbot" class="nav-link" routerLinkActive="active">
+        <i class="fas fa-robot"></i>
+        <span>ChatBot</span>
+      </a>
+      <a routerLink="/deepmedicament" class="nav-link relative" routerLinkActive="active">
+        <i class="fas fa-brain"></i>
+        <span>DeepMedicament</span>
+        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">AI</span>
+      </a>
+    </ng-container>
+
+    <!-- Boutons pour le docteur -->
+    <ng-container *ngIf="authService.isDoctor()">
+      <a routerLink="/brain" class="nav-link" routerLinkActive="active">
+        <i class="fas fa-brain"></i>
+        <span>Brain Stroke</span>
+      </a>
+      <a routerLink="/resp" class="nav-link" routerLinkActive="active">
+        <i class="fas fa-lungs"></i>
+        <span>Respiratory</span>
+      </a>
+      <a routerLink="/mortality" class="nav-link" routerLinkActive="active">
+        <i class="fas fa-chart-pie"></i>
+        <span>Mortality</span>
+      </a>
+      <a routerLink="/heartattack" class="nav-link" routerLinkActive="active">
+        <i class="fas fa-heartbeat"></i>
+        <span>Heart Attack</span>
+      </a>
+      <a routerLink="/report" class="nav-link" routerLinkActive="active">
+        <i class="fas fa-chart-line"></i>
+        <span>Power BI</span>
+      </a>
+    </ng-container>
+  </div>
+
+  <div class="user-controls">
+    <button class="logout-button" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

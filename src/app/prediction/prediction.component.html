@@ -1,0 +1,140 @@
+<div class="prediction-container">
+  <div class="prediction-header">
+    <div class="heart-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+      </svg>
+    </div>
+    <h2>Heart Disease Risk Assessment</h2>
+    <p class="subtitle">Fill in your health details to get a personalized risk prediction</p>
+  </div>
+
+  <div class="form-card">
+    <form (ngSubmit)="onSubmit()" *ngIf="!isLoading; else loading">
+      <div class="form-grid">
+        <div class="form-group" *ngFor="let field of fields">
+          <label [for]="field.name">
+            {{ field.label }}
+            <span class="required-indicator">*</span>
+          </label>
+
+          <!-- Select field for options -->
+          <div class="select-wrapper" *ngIf="field.options">
+            <select [(ngModel)]="formData[field.name]"
+                    [name]="field.name"
+                    [id]="field.name"
+                    required>
+              <option [ngValue]="null" disabled selected>Select {{ field.label }}</option>
+              <option *ngFor="let opt of field.options" [ngValue]="opt.value">
+                {{ opt.label }}
+              </option>
+            </select>
+            <div class="select-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Input field for numeric values -->
+          <div class="input-wrapper" *ngIf="!field.options">
+            <input type="number"
+                   [(ngModel)]="formData[field.name]"
+                   [name]="field.name"
+                   [id]="field.name"
+                   [placeholder]="'Enter ' + field.label"
+                   required />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="resetForm()">
+          Reset Form
+        </button>
+        <button type="submit" class="btn-primary">
+          <span class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm5-2.25A.75.75 0 017.75 7h4.5a.75.75 0 01.75.75v4.5a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75v-4.5z" clip-rule="evenodd" />
+            </svg>
+          </span>
+          Calculate Risk
+        </button>
+      </div>
+    </form>
+
+    <ng-template #loading>
+      <div class="loading-state">
+        <div class="loading-spinner">
+          <div class="spinner"></div>
+        </div>
+        <p class="loading-text">Analyzing your health data...</p>
+        <p class="loading-subtext">This usually takes just a few seconds</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <div *ngIf="predictionResult" class="result-card" [class.high-risk-card]="predictionResult.includes('High Risk')" 
+                                           [class.low-risk-card]="predictionResult.includes('Low Risk')">
+    <div class="result-header">
+      <h3>Your Heart Health Assessment</h3>
+      <div class="risk-level" [class.high-risk]="predictionResult.includes('High Risk')" 
+                            [class.low-risk]="predictionResult.includes('Low Risk')">
+        {{ predictionResult.includes('High Risk') ? 'High Risk' : 'Low Risk' }}
+      </div>
+    </div>
+    
+    <div class="result-body">
+      <div class="result-icon">
+        <svg *ngIf="predictionResult.includes('Low Risk')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+        </svg>
+        <svg *ngIf="predictionResult.includes('High Risk')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      
+      <div class="result-content">
+        <p>{{ predictionResult }}</p>
+        
+        <div class="recommendations" *ngIf="predictionResult.includes('High Risk')">
+          <h4>Recommendations:</h4>
+          <ul>
+            <li>Consult with a cardiologist as soon as possible</li>
+            <li>Schedule regular health check-ups</li>
+            <li>Consider lifestyle changes (diet, exercise)</li>
+            <li>Monitor your blood pressure regularly</li>
+          </ul>
+        </div>
+        
+        <div class="recommendations" *ngIf="predictionResult.includes('Low Risk')">
+          <h4>Good job!</h4>
+          <ul>
+            <li>Continue with healthy habits</li>
+            <li>Annual check-ups are still recommended</li>
+            <li>Maintain balanced diet and regular exercise</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <button class="btn-secondary" (click)="resetForm()">
+      Perform Another Assessment
+    </button>
+  </div>
+
+  <div *ngIf="error" class="error-card">
+    <div class="error-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="error-content">
+      <h3>Unable to Complete Assessment</h3>
+      <p>{{ error }}</p>
+    </div>
+    <button class="btn-secondary" (click)="error = null">
+      Try Again
+    </button>
+  </div>
+</div>

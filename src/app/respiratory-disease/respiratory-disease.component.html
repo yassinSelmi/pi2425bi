@@ -1,0 +1,200 @@
+<div class="respiratory-app">
+  <!-- Section principale de prédiction -->
+  <div class="prediction-container">
+    <div class="prediction-header">
+      <h2><span class="emoji">🩺</span> Prédiction Maladies Respiratoires</h2>
+      <p class="subtitle">Analyse des sons respiratoires par intelligence artificielle</p>
+    </div>
+
+    <!-- Zone de dépôt améliorée -->
+    <div class="drop-zone" 
+         (click)="fileInput.click()"
+         (drop)="onDrop($event)"
+         (dragover)="onDragOver($event)"
+         [class.active]="isDragOver">
+      <div class="drop-content">
+        <i class="upload-icon">🎤</i>
+        <p>Glissez-déposez votre enregistrement ou <span>parcourir</span></p>
+        <p class="file-types">Formats supportés: .wav, .mp3, .aac</p>
+      </div>
+      <input #fileInput type="file" (change)="onFileSelected($event)" accept="audio/*" hidden>
+    </div>
+
+    <!-- Bouton d'analyse avec état de chargement -->
+    <button class="analyze-btn" (click)="submitAudio()" [disabled]="!selectedFile || isLoading">
+      <span *ngIf="!isLoading">Analyser l'audio</span>
+      <span *ngIf="isLoading" class="spinner">
+        <span class="spinner-dot">.</span>
+        <span class="spinner-dot">.</span>
+        <span class="spinner-dot">.</span>
+      </span>
+    </button>
+
+    <!-- Prévisualisation audio -->
+    <div *ngIf="audioPreview" class="preview-container">
+      <div class="preview-header">
+        <h3>Enregistrement sélectionné :</h3>
+        <button class="clear-btn" (click)="clearSelection()">×</button>
+      </div>
+      <div class="audio-wrapper">
+        <audio controls [src]="audioPreview" class="audio-player"></audio>
+        <div *ngIf="isLoading" class="loading-overlay">
+          <div class="loading-spinner"></div>
+          <p>Analyse en cours...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Résultats avec visualisation améliorée -->
+    <div *ngIf="prediction" class="result-container" [class.high-risk]="isHighRisk">
+      <div class="result-header">
+        <h3>Résultat de l'analyse :</h3>
+        <span class="risk-indicator">{{ isHighRisk ? '⚠️ Attention' : '✅ Normal' }}</span>
+      </div>
+      <div class="result-content">
+        <div class="confidence-meter">
+          <div class="meter-bar" [style.width.%]="confidence * 100"></div>
+          <span class="confidence-value">{{ (confidence * 100).toFixed(1) }}% de confiance</span>
+        </div>
+        
+        <div class="diagnosis-box">
+          <div class="diagnosis-icon">
+            <span *ngIf="isHighRisk">🩺</span>
+            <span *ngIf="!isHighRisk">🌬️</span>
+          </div>
+          <div class="diagnosis-text">
+            <h4>Diagnostic probable :</h4>
+            <p class="prediction-text">{{ prediction }}</p>
+          </div>
+        </div>
+        
+        <div *ngIf="isHighRisk" class="emergency-actions">
+          <button class="emergency-btn">
+            <i class="emergency-icon">🚨</i> Consulter un pneumologue
+          </button>
+          <button class="info-btn" (click)="showInfoModal = true">
+            <i class="info-icon">ℹ️</i> Symptômes à surveiller
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section article améliorée -->
+  <div class="article-container">
+    <article class="resp-article">
+      <header class="article-header">
+        <h2><span class="emoji">🌬️</span> Comprendre les Maladies Respiratoires et l'IA</h2>
+        <p class="article-subtitle">Détection précoce par analyse audio</p>
+      </header>
+
+      <div class="article-content">
+        <p>
+          Les maladies respiratoires comme l'asthme, la BPCO ou la fibrose pulmonaire affectent des millions de personnes. 
+          Notre IA analyse les caractéristiques audio des sons respiratoires avec une précision de 94% pour détecter ces pathologies à un stade précoce.
+        </p>
+
+        <div class="sound-visualization">
+          <div class="sound-wave">
+            <div class="wave" *ngFor="let wave of [1,2,3,4,5,6,7,8,9,10]" 
+                 [style.height.px]="getRandomWaveHeight()"></div>
+          </div>
+          <div class="sound-types">
+            <div class="sound-type" *ngFor="let type of soundTypes">
+              <span class="sound-icon">{{ type.icon }}</span>
+              <span class="sound-label">{{ type.label }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-facts">
+          <h3><span class="emoji">🤖</span> Comment l'IA analyse-t-elle votre respiration?</h3>
+          <p>Notre modèle examine plus de 120 caractéristiques audio dont:</p>
+          <div class="features-grid">
+            <div class="feature-item">
+              <span class="feature-icon">🎵</span>
+              <span>Fréquences caractéristiques</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">📊</span>
+              <span>Patterns de sifflements</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">⏱️</span>
+              <span>Durée des phases respiratoires</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🔊</span>
+              <span>Intensité des sons anormaux</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="recommendations">
+          <h3><span class="emoji">✅</span> Conseils pour une meilleure santé respiratoire :</h3>
+          <div class="recommendations-grid">
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #ff6b6b;">🚭</div>
+              <h4>Éviter le tabac</h4>
+              <p>Première cause de maladies respiratoires chroniques</p>
+            </div>
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #48dbfb;">😷</div>
+              <h4>Protection</h4>
+              <p>Masque en milieu pollué ou lors d'épidémies</p>
+            </div>
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #1dd1a1;">🌿</div>
+              <h4>Air pur</h4>
+              <p>Plantes dépolluantes et aération quotidienne</p>
+            </div>
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #f368e0;">🏃‍♀️</div>
+              <h4>Exercice</h4>
+              <p>30 minutes d'activité modérée 3 fois/semaine</p>
+            </div>
+            <div class="recommendation-card">
+              <div class="card-icon" style="background-color: #ff9f43;">🧘</div>
+              <h4>Respiration</h4>
+              <p>Exercices de respiration profonde quotidienne</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="emergency-info">
+          <h3><span class="emoji">⚠️</span> Symptômes d'alerte :</h3>
+          <div class="symptoms-grid">
+            <div class="symptom-item">
+              <div class="symptom-icon">😤</div>
+              <p>Essoufflement anormal</p>
+            </div>
+            <div class="symptom-item">
+              <div class="symptom-icon">🤧</div>
+              <p>Toux persistante (>3 semaines)</p>
+            </div>
+            <div class="symptom-item">
+              <div class="symptom-icon">💨</div>
+              <p>Sifflements respiratoires</p>
+            </div>
+            <div class="symptom-item">
+              <div class="symptom-icon">🩸</div>
+              <p>Crachats sanguinolents</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Modal d'information -->
+  <div *ngIf="showInfoModal" class="info-modal">
+    <div class="modal-content">
+      <button class="close-modal" (click)="showInfoModal = false">×</button>
+      <h3>Symptômes à surveiller</h3>
+      <ul class="symptoms-list">
+        <li *ngFor="let symptom of criticalSymptoms">{{ symptom }}</li>
+      </ul>
+      <button class="modal-btn" (click)="showInfoModal = false">J'ai compris</button>
+    </div>
+  </div>
+</div>

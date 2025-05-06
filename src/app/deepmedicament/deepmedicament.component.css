@@ -1,0 +1,233 @@
+/* src/app/components/deepmedicament/deepmedicament.component.css */
+.deepmed-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+  }
+  
+  .header h2 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .medical-icon {
+    color: #3498db;
+    margin-right: 10px;
+  }
+  
+  .subtitle {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .form-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+  }
+  
+  label i {
+    margin-right: 8px;
+    color: #3498db;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.3s;
+  }
+  
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  }
+  
+  textarea {
+    min-height: 200px;
+    resize: vertical;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  
+  button i {
+    margin-right: 8px;
+  }
+  
+  .predict-btn {
+    background: #3498db;
+    color: white;
+    flex: 1;
+  }
+  
+  .predict-btn:hover {
+    background: #2980b9;
+  }
+  
+  .predict-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  .clear-btn {
+    background: #f1f2f6;
+    color: #2c3e50;
+  }
+  
+  .clear-btn:hover {
+    background: #dfe6e9;
+  }
+  
+  .result-section {
+    margin-top: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .result-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 4px solid #3498db;
+  }
+  
+  .result-card h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .result-card h3 i {
+    margin-right: 10px;
+    color: #3498db;
+  }
+  
+  .result-content {
+    margin: 1rem 0;
+  }
+  
+  .specialty-badge {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .badge-label {
+    font-weight: 600;
+    margin-right: 10px;
+  }
+  
+  .badge-value {
+    background: #3498db;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  
+  .confidence-meter {
+    margin-top: 1.5rem;
+  }
+  
+  .meter-label {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .meter-bar {
+    height: 10px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .meter-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    border-radius: 5px;
+  }
+  
+  .disclaimer {
+    margin-top: 1.5rem;
+    padding: 10px;
+    background: #fff8e1;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #e67e22;
+    display: flex;
+    align-items: center;
+  }
+  
+  .disclaimer i {
+    margin-right: 8px;
+  }
+  
+  .info-footer {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .info-tile {
+    display: flex;
+    align-items: center;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+  
+  .info-tile i {
+    margin-right: 6px;
+    color: #3498db;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
