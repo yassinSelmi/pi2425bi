@@ -1,27 +1,91 @@
-# Piweb
+🩺 BI1 Healthcare - Projet Fullstack Angular + Flask + IA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Ce projet combine une interface Angular pour les utilisateurs, un backend Flask pour la logique métier et les appels aux modèles IA, et une base de données MySQL via XAMPP. L’objectif est de prédire des maladies (ex. AVC) à partir d'inputs utilisateurs ou de fichiers audio/image.
 
-## Development server
+🔧 Étapes de mise en place :
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Structure du projet :
 
-## Code scaffolding
+frontend/ : application Angular (ng serve)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+backend/ : API Flask avec plusieurs fichiers .py (chacun exécute un modèle .h5)
 
-## Build
+models/ : modèles Keras sauvegardés (.h5)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+requirements.txt : dépendances Python
 
-## Running unit tests
+README.md : documentation (facultatif)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Dossiers à ne pas oublier : .gitignore, .env (non poussé)
 
-## Running end-to-end tests
+Lancer l’interface Angular :
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Aller dans frontend/
 
-## Further help
+Exécuter ng serve
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Accéder à l’application sur http://localhost:4200
+
+Lancer une API Flask :
+
+Aller dans backend/
+
+Exécuter le fichier de ton choix (ex : python brain_stroke.py)
+
+API disponible sur http://127.0.0.1:5000
+
+Installer les dépendances : pip install -r requirements.txt
+
+Configurer XAMPP pour la base de données (si utilisée) :
+
+Démarrer XAMPP
+
+Activer Apache + MySQL
+
+Créer une base dans phpMyAdmin
+
+Lier la base depuis Flask (via mysql.connector ou SQLAlchemy)
+
+Installer les dépendances backend :
+
+Python ≥ 3.8
+
+Flask, Flask-CORS
+
+Keras / TensorFlow
+
+librosa (analyse audio)
+
+Pillow (images)
+
+Twilio (SMS)
+
+Installer avec : pip install -r requirements.txt
+
+Dépendances Angular :
+
+Angular CLI v16.2+
+
+Modules selon besoin (Angular Material, Forms, etc.)
+
+Lancer avec ng serve
+
+Chargement des modèles IA :
+
+Les modèles .h5 sont chargés avec keras.models.load_model()
+
+Placer tous les modèles dans le dossier models/
+
+Tests disponibles :
+
+ng test pour tester Angular
+
+Chaque .py Flask doit avoir un endpoint testable (/predict, /status, etc.)
+
+Courbes, confusion matrix, ou F1-score à intégrer dans des notebooks (optionnel)
+
+Exécution séparée :
+
+Angular et Flask tournent séparément (frontend → backend via HTTP)
+
+Assure-toi que les ports ne sont pas bloqués (CORS activé dans Flask)
